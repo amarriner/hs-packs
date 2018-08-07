@@ -4,30 +4,20 @@ var request = require("sync-request");
 var cards = require("./json/cards.json");
 
 var delimiter = "|"
-var packNumber = 1398;
-var formulas = [
-    '=IF(C5516 <> "", VLOOKUP(C5516, Collection!$B$2:$H, 2, FALSE),"")',
-    '0',
-    '=IF(C5516 <> "", VLOOKUP(C5516, Collection!$B$2:$H, 3, FALSE),"")',
-    'Gold',
-    '=IF(C5516 <> "", IF(E5516=1, VLOOKUP(D5516, Tables!$A$2:$D$5, 4, FALSE), VLOOKUP(D5516, Tables!$A$2:$D$5, 3, FALSE)), "")'
-]
+var packNumber = 1511;
 var log = fs.readFileSync("C:\\Program Files (x86)\\Hearthstone\\Logs\\Achievements.log", "utf-8").toString().split("\n");
 var today = new Date();
 today = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 
 function getCard(id) {
 
-    for (set in cards) {
-        for (var i = 0; i < cards[set].length; i++) {
+    for (j in cards) {
+        var card = cards[j];
 
-            var card = cards[set][i];
-
-            if (card.cardId == id) {
-                return card;
-            }
-
+        if (card.id == id) {
+            return card;
         }
+
     }
 
     return {};
