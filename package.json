@@ -4,7 +4,10 @@
   "description": "Parse Hearthstone Achievements.log for Pack Openings",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "npm install",
+    "update": "node getCards.js",
+    "run": "node index.js"
   },
   "author": "Aaron Marriner <marrinea@strose.edu>",
   "license": "ISC",

@@ -4,10 +4,12 @@ var request = require("sync-request");
 var cards = require("./json/cards.json");
 
 var delimiter = "|"
-var packNumber = 1511;
+var packNumber = 1643;
 var log = fs.readFileSync("C:\\Program Files (x86)\\Hearthstone\\Logs\\Achievements.log", "utf-8").toString().split("\n");
 var today = new Date();
 today = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+var skipCards = 2;
+var skipped = 0;
 
 function getCard(id) {
 
@@ -34,19 +36,23 @@ for (var i = 0; i < log.length; i++) {
 
     if (line.search(cardGained) >= 0) {
 
-        var id = cardId.exec(line)[1];
-        var gold = 0;
-        if (line.search(golden) >= 0) {
-            gold = 1;            
-        }
-        
-        console.log(today + delimiter + packNumber + delimiter + getCard(id).name + delimiter + gold);
-        
-        numberOfCards++;
-        
-        if (numberOfCards === 5) {
-            numberOfCards = 0;
-            packNumber++;
+        skipped++;
+        if (skipped > skipCards) {
+
+            var id = cardId.exec(line)[1];
+            var gold = 0;
+            if (line.search(golden) >= 0) {
+                gold = 1;
+            }
+
+            console.log(today + delimiter + packNumber + delimiter + getCard(id).name + delimiter + gold);
+
+            numberOfCards++;
+
+            if (numberOfCards === 5) {
+                numberOfCards = 0;
+                packNumber++;
+            }
         }
 
     }
